@@ -1,0 +1,12 @@
+ja:
+  activerecord:
+    models:
+      user: 'ユーザー'
+      article: '記事'
+    attributes:
+      user:
+        email: 'メールアドレス'
+        password: 'パスワード'
+      article:
+        title: 'タイトル'
+        content: '内容'
