@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
 
-  root to: 'articles#index'
 
+  root to: 'articles#index'
+  get '/mypage' => 'mypages#index'
   devise_for :users,
-    controllers: {
-    sessions: 'users/sessions'
-  }
+    controllers: {sessions: 'users/sessions'}
   resources :sample_articles
   resources :articles
 
