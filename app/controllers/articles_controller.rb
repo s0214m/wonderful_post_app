@@ -3,10 +3,11 @@ class ArticlesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[ index show ]
 
   def index
-    @articles = Article.all.includes(:user).page(params[:page]).search(params[:search])
+    @articles = Article.all.includes(:tags).page(params[:page]).search(params[:search])
   end
 
   def create
+    binding.pry
     @article = current_user.articles.new(article_params)
 
     respond_to do |format|
@@ -55,7 +56,7 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:title, :content)
+    params.require(:article).permit(:title, :content, { :tag_ids=> [] })
   end
 
   def set_article
