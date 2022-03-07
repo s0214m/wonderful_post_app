@@ -3,7 +3,7 @@ class ArticlesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[ index show ]
 
   def index
-    @articles = Article.all.includes(:user).page(params[:page])
+    @articles = Article.all.includes(:user).page(params[:page]).search(params[:search])
   end
 
   def create
@@ -45,6 +45,11 @@ class ArticlesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to articles_url, notice: "記事を削除しました" }
     end
+  end
+
+  def search
+    @articles = Article.search(params[:title]).page(params[:page])
+    render :index
   end
 
   private
